@@ -3,7 +3,7 @@
 # Safeties on: https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
 set -euo pipefail
 
-DEFAULT_TAG=naushadh/hive-metastore:latest
+DEFAULT_TAG=saudeintegrada/hive-metastore:latest
 TAG=${TAG:-$DEFAULT_TAG}
 
 docker buildx ls | grep multiarch || docker buildx create --name multiarch --use
