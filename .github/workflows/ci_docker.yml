@@ -53,6 +53,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile-postgres
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_REPOSITORY }}:${{ env.DOCKER_IMAGE_TAG }}
