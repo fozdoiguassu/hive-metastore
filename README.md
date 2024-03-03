@@ -35,10 +35,10 @@ And then run
 ```bash
 $ docker compose up -d
 [+] Running 4/4
- ✔ Container hive-metastore-localstack-1  Healthy                                                                   10.8s 
- ✔ Container hive-metastore-postgres-1    Healthy                                                                   30.8s 
- ✔ Container hive-metastore-s3_setup-1    Started                                                                   11.0s 
- ✔ Container hive-metastore-app-1         Started                                                                   31.0s 
+ ✔ Container hive-metastore-localstack-1  Healthy                                                                   10.8s
+ ✔ Container hive-metastore-postgres-1    Healthy                                                                   30.8s
+ ✔ Container hive-metastore-s3_setup-1    Started                                                                   11.0s
+ ✔ Container hive-metastore-app-1         Started                                                                   31.0s
 $ docker compose ps
 NAME                          IMAGE                       COMMAND                  SERVICE             CREATED              STATUS                    PORTS
 hive-metastore-app-1          hive-metastore-app          "./run.sh"               app                 About a minute ago   Up 8 seconds              0.0.0.0:9083->9083/tcp
