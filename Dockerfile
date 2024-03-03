@@ -3,11 +3,11 @@ FROM openjdk:16-slim
 # Lifted from: https://github.com/joshuarobinson/presto-on-k8s/blob/1c91f0b97c3b7b58bdcdec5ad6697b42e50d74c7/hive_metastore/Dockerfile
 
 # see https://hadoop.apache.org/releases.html
-ARG HADOOP_VERSION=3.3.0
+ARG HADOOP_VERSION=3.3.6
 # see https://downloads.apache.org/hive/
-ARG HIVE_METASTORE_VERSION=3.0.0
+ARG HIVE_METASTORE_VERSION=3.1.3
 # see https://jdbc.postgresql.org/download.html#current
-ARG POSTGRES_CONNECTOR_VERSION=42.2.18
+ARG POSTGRES_CONNECTOR_VERSION=42.7.2
 
 # Set necessary environment variables.
 ENV HADOOP_HOME="/opt/hadoop"
@@ -20,9 +20,16 @@ ENV DATABASE_PORT=5432
 WORKDIR /app
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+RUN apt-get update && apt-get install --no-install-recommends -y apt-transport-https ca-certificates curl gnupg \
+    && curl -sLf --retry 3 --tlsv1.2 --proto "=https" 'https://packages.doppler.com/public/cli/gpg.DE2A7741A397C129.key' | gpg --dearmor -o /usr/share/keyrings/doppler-archive-keyring.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/doppler-archive-keyring.gpg] https://packages.doppler.com/public/cli/deb/debian any-version main" | tee /etc/apt/sources.list.d/doppler-cli.list \
+    && apt-get update \
+    && apt-get -y --no-install-recommends install doppler \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # hadolint ignore=DL3008
-RUN \
-  echo "Install OS dependencies" && \
+RUN echo "Install OS dependencies" && \
     build_deps="curl" && \
     apt-get update -y && \
     apt-get install -y $build_deps net-tools --no-install-recommends && \
@@ -53,5 +60,7 @@ RUN \
 
 COPY run.sh run.sh
 
+ENTRYPOINT ["doppler", "run", "--"]
+
 CMD [ "./run.sh" ]
-HEALTHCHECK CMD [ "sh", "-c", "netstat -ln | grep 9083" ]
+HEALTHCHECK --interval=5m CMD [ "sh", "-c", "netstat -ln | grep 9083" ]
