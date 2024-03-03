@@ -1,4 +1,4 @@
-name: CI/CD Pipeline Postgres
+name: CI/CD Pipeline Hive
 
 # Desabilita múltiplas execuções da mesma pipeline
 concurrency:
