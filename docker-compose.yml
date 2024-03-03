@@ -47,6 +47,7 @@ services:
       - S3_ENDPOINT_URL=http://localstack:${LOCALSTACK_PORT}
       - S3_BUCKET
       - S3_PREFIX
+      - DOPPLER_TOKEN
     ports:
       - '9083:9083'
 
