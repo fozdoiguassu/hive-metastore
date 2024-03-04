@@ -63,4 +63,3 @@ COPY run.sh run.sh
 ENTRYPOINT ["doppler", "run", "--"]
 
 CMD [ "./run.sh" ]
-HEALTHCHECK --interval=30s CMD [ "sh", "-c", "netstat -ln | grep 9083" ]
