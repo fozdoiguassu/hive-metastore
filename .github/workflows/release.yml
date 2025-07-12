@@ -14,7 +14,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: api-avaliar-prova
+  IMAGE_NAME: hive-metastore
 
 jobs:
   pre_commit_validation:
