@@ -1,5 +1,7 @@
 FROM apache/hive:4.0.1
 
+LABEL org.opencontainers.image.source=https://github.com/fozdoiguassu/hive-metastore
+
 ARG POSTGRES_CONNECTOR_VERSION=42.2.18
 
 ENV SERVICE_NAME=metastore
