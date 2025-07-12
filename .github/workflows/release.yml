@@ -63,12 +63,14 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build e Push da Imagem
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.version }}
+          tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Create GitHub release
         uses: actions/create-release@v1
