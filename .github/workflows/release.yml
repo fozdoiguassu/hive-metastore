@@ -69,8 +69,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.version }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       - name: Create GitHub release
         uses: actions/create-release@v1
