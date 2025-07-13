@@ -16,7 +16,7 @@ RUN \
   echo "Install OS dependencies" && \
     build_deps="curl" && \
     apt-get update -y && \
-    apt-get install -y $build_deps net-tools --no-install-recommends && \
+    apt-get install -y $build_deps net-tools gettext-base --no-install-recommends && \
   echo "Add S3a jars to the classpath using this hack" && \
     ln -s /opt/hadoop/share/hadoop/tools/lib/hadoop-aws* /opt/hadoop/share/hadoop/common/lib/ && \
     ln -s /opt/hadoop/share/hadoop/tools/lib/aws-java-sdk* /opt/hadoop/share/hadoop/common/lib/ && \
@@ -34,7 +34,6 @@ RUN chown -R hive:$UID /opt/tez && \
     chown -R hive:$UID /opt/hive && \
     chown -R hive:$UID /opt/hadoop && \
     chown -R hive:$UID /opt/hive/conf && \
-    chown -R hive:$UID /opt/hive/data/warehouse && \
-    chown -R hive:$UID /home/hive/.beeline
+    chown -R hive:$UID /opt/hive/data/warehouse
 
 USER hive
