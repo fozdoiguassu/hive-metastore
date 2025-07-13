@@ -29,4 +29,12 @@ RUN \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+ARG UID=1000
+RUN chown -R hive:$UID /opt/tez && \
+    chown -R hive:$UID /opt/hive && \
+    chown -R hive:$UID /opt/hadoop && \
+    chown -R hive:$UID /opt/hive/conf && \
+    chown -R hive:$UID /opt/hive/data/warehouse && \
+    chown -R hive:$UID /home/hive/.beeline
+
 USER hive
